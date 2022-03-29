@@ -116,7 +116,7 @@ void handleGet(int connfd, char* uri, rio_t * rio){
     readRequestHeader(rio);
     //parse uri from get request
     isStatic = parseURI(uri, filename, cgi_args);
-    cout << "[Request] GET Filename : " << filename << endl << endl;//debug use
+    cout << "[Request] GET Filename : " << filename << endl;//debug use
     if(stat(filename, &sbuf) < 0){
         clientError(connfd, "404", "Not Found", "Web Server Could Not Find This File");
         return;
@@ -158,6 +158,7 @@ void postResponse(int connfd, bool login){
 }
 
 int parseURI(char* uri, char* filename, char* cgi_args){
+    cout << "[Server] Parse URI" << endl;
     char *ptr;
     if(!strstr(uri, "cgi-bin")){
         //string cgi-bin is not inside uri (Static)
@@ -186,6 +187,7 @@ int parseURI(char* uri, char* filename, char* cgi_args){
 }
 
 void readRequestHeader(rio_t *rp){
+    cout << "[Server] Read Get Request Header" << endl;
     char buf[MAXBUFFER];
     rio_readlineb(rp, buf, MAXLINE);
     while(strcmp(buf, "\r\n")){
@@ -213,6 +215,7 @@ void getFileType(char* filename, char* filetype){
 
 //send a http response, body include local file
 void serve_static(int connfd, char* filename, int filesize){
+    cout << "[Server] HTTP Response (STATIC)" << endl << endl;
     char buf[MAXBUFFER], filetype[MAXLINE];
     getFileType(filename, filetype);
     //send response header to client
@@ -235,6 +238,7 @@ void serve_static(int connfd, char* filename, int filesize){
 // Fork a child process and run a CGI program in the context of 
 // the child process to serve various types of dynamic content
 void serve_dynamic(int connfd, char* filename, char* cgi_args){
+    cout << "[Server] HTTP Response (DYNAMIC)" << endl << endl;
     char buf[MAXBUFFER];
     char *emptyList[] = { NULL };
     //send response header
