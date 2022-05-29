@@ -7,6 +7,7 @@
 - 实验3 - 实现一个轻量级的WEB服务器
 - 实验4 - 使用模拟软件组建互联网络
 - 实验5 - 动态路由协议OSPF配置
+- 实验6 - 网络协议分析
 
 ## 作业
 
@@ -15,3 +16,5 @@
 - 作业3 - 数据链路层 Data Link Layer
 - 作业4 - 介质访问控制层 MAC Layer
 - 作业5 - 网络层 Network Layer
+- 作业6 - 传输层 Transport Layer
+- 作业7 - 应用层 Application Layer
